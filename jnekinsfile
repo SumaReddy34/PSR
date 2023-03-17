@@ -1,0 +1,19 @@
+pipeline{
+    agent any
+    environment{
+        PATH = "/opt/maven-3.9/bin:$PATH "
+    }
+    stages{
+        stage("git clone"){
+            steps{
+                git branch: 'main', credentialsId: 'gitsshkey', url: 'https://github.com/SumaReddy34/PSR.git'
+            }
+        }
+            
+        stage("mvn build"){
+            steps{
+                sh 'mvn -v'
+            }
+        }
+    }
+}
